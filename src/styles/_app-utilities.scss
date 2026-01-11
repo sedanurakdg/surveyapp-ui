@@ -1,0 +1,23 @@
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--s-4);
+}
+
+.page-title {
+  margin: 0 0 var(--s-3) 0;
+  font-weight: 700;
+}
+
+.stack {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}

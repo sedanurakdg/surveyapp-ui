@@ -1,0 +1,43 @@
+<div class="loginShell">
+  <app-page maxWidth="md">
+    <div class="center">
+      <app-card title="SurveyApp Login" subtitle="Devam etmek için giriş yapın." class="loginCard">
+        <form class="stack" [formGroup]="form" (ngSubmit)="submit()">
+          <app-alert
+            *ngIf="error()"
+            variant="error"
+            title="İşlem başarısız"
+            [message]="error()!"
+            [closable]="true"
+            (closed)="clearError()"
+          ></app-alert>
+
+          <app-form-field
+            [control]="form.controls.email"
+            label="Email"
+            type="email"
+            autocomplete="email"
+            placeholder="ornek@firma.com"
+          ></app-form-field>
+
+          <app-form-field
+            [control]="form.controls.password"
+            label="Şifre"
+            type="password"
+            autocomplete="current-password"
+            placeholder="••••••••"
+          ></app-form-field>
+
+          <app-button
+            type="submit"
+            variant="primary"
+            size="md"
+            [fullWidth]="true"
+            [loading]="loading()"
+            text="Giriş"
+          ></app-button>
+        </form>
+      </app-card>
+    </div>
+  </app-page>
+</div>

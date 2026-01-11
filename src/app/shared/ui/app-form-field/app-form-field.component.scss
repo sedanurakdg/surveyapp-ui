@@ -1,0 +1,27 @@
+.field { width: 100%; }
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: var(--radius-md) !important;
+}
+.field { width: 100%; }
+
+/* Material input bazen browser default background alabiliyor */
+:host ::ng-deep .mat-mdc-input-element {
+  color: var(--text) !important;
+  caret-color: var(--brand-primary);
+}
+
+/* Input background açık görünüyorsa bunu sabitle */
+:host ::ng-deep .mdc-text-field--outlined {
+  background: transparent !important;
+}
+
+/* Autofill (Chrome) beyaza boyamasın */
+:host ::ng-deep input.mat-mdc-input-element:-webkit-autofill {
+  -webkit-text-fill-color: var(--text) !important;
+  transition: background-color 999999s ease-in-out 0s;
+}
+:host ::ng-deep .mat-mdc-input-element {
+  color: var(--text) !important;
+  background: transparent !important;
+}

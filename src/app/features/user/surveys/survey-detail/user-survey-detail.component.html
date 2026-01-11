@@ -1,0 +1,85 @@
+<app-page
+  [title]="survey?.title || 'Anket'"
+  [subtitle]="survey?.description || 'Lütfen soruları yanıtlayın.'"
+  maxWidth="lg"
+>
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+    <div class="actions">
+      <app-button variant="outline" size="sm" text="Tekrar Dene" (click)="load()"></app-button>
+      <a routerLink="/user/surveys" class="link">Listeye dön</a>
+    </div>
+  </app-card>
+
+  <ng-container *ngIf="!loading && !error && survey">
+    <div class="dates">
+      <span>Başlangıç: {{ survey.startsAtUtc | date: 'dd.MM.yyyy HH:mm' }}</span>
+      <span>Bitiş: {{ survey.endsAtUtc | date: 'dd.MM.yyyy HH:mm' }}</span>
+    </div>
+
+    <app-card padded="md">
+      <form [formGroup]="form">
+        <div formArrayName="answers" class="qList">
+          <div class="q" *ngFor="let q of survey.questions; let i = index" [formGroupName]="i">
+            <div class="qHeader">
+              <div class="qIndex">{{ i + 1 }}</div>
+              <div class="qText">{{ q.text }}</div>
+            </div>
+
+            <mat-radio-group
+              class="choices"
+              formControlName="selectedOptionIndex"
+              [disabled]="isSubmitted"
+            >
+              <mat-radio-button
+                class="choice"
+                *ngFor="let c of q.choices"
+                [value]="c.index"
+                [class.selected]="answers.at(i).get('selectedOptionIndex')?.value === c.index"
+              >
+                {{ c.text }}
+              </mat-radio-button>
+            </mat-radio-group>
+
+            <div
+              class="qError"
+              *ngIf="
+                answers.at(i).get('selectedOptionIndex')?.touched &&
+                answers.at(i).get('selectedOptionIndex')?.invalid
+              "
+            >
+              Bu soru zorunludur.
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="footerActions">
+            <!-- Eğer gönderildiyse buton yerine chip -->
+            <span class="statusChip done fw-bold" *ngIf="isSubmitted">Gönderildi</span>
+
+            <!-- Gönderilmediyse normal buton -->
+            <app-button
+              *ngIf="!isSubmitted"
+              variant="primary"
+              size="md"
+              [loading]="saving"
+              text="Gönder"
+              type="submit"
+              (click)="submit()"
+            ></app-button>
+
+            <a routerLink="/user/surveys">
+              <app-button variant="outline" size="md" text="Vazgeç"></app-button>
+            </a>
+          </div>
+
+          <!-- Bilgi satırı -->
+          <div class="infoBox" *ngIf="isSubmitted">Bu anket daha önce gönderildi.</div>
+        </div>
+      </form>
+    </app-card>
+  </ng-container>
+</app-page>

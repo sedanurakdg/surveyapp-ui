@@ -1,0 +1,130 @@
+.dates {
+  margin: 0 0 var(--s-3) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  color: var(--c-muted);
+  font-size: 12px;
+}
+
+.qList {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.q {
+  padding: var(--s-4);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-3);
+}
+
+.qHeader {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: var(--s-3);
+  align-items: start;
+  margin-bottom: var(--s-3);
+}
+
+.choices {
+  display: grid;
+  gap: var(--s-2);
+  padding-left: 44px;
+}
+
+/* radio’yu full width, kart görünümlü yap */
+.choice {
+  display: block;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-3);
+  padding: 10px 12px;
+  margin: 0 !important;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease;
+}
+
+/* Material iç layout’u düzelt */
+.choice ::ng-deep .mdc-form-field {
+  width: 100%;
+}
+
+.choice ::ng-deep .mdc-label {
+  width: 100%;
+}
+
+/* hover */
+.choice:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* seçili state */
+.choice.selected {
+  border-color: rgba(33, 150, 243, 0.55);
+  background: rgba(33, 150, 243, 0.08);
+}
+
+/* read-only iken daha pasif */
+:host ::ng-deep mat-radio-group[ng-reflect-disabled='true'] .choice {
+  opacity: 0.85;
+}
+
+/* mobil */
+@media (max-width: 600px) {
+  .choices {
+    padding-left: 0;
+  }
+}
+
+.qError {
+  margin-top: var(--s-2);
+  padding-left: 44px;
+  color: var(--c-danger);
+  font-size: 12px;
+}
+
+.footer {
+  margin-top: var(--s-5);
+  display: grid;
+  gap: var(--s-3);
+}
+
+.footerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.statusChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--c-border);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.statusChip.done {
+  border-color: rgba(0, 128, 0, 0.35);
+  color: rgba(0, 128, 0, 0.95);
+  background: rgba(0, 128, 0, 0.08);
+}
+
+.infoBox {
+  padding: 10px 12px;
+  border-radius: var(--r-3);
+  border: 1px solid rgba(0, 128, 0, 0.25);
+  background: rgba(0, 128, 0, 0.06);
+  color: rgba(0, 128, 0, 0.95);
+  font-size: 13px;
+}
+
+/* Mobilde aksiyonlar alt alta gelsin */
+@media (max-width: 600px) {
+  .footerActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

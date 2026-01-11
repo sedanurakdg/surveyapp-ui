@@ -1,0 +1,73 @@
+.form {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3);
+}
+
+.input,
+.textarea {
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-3);
+  padding: 10px 12px;
+  outline: none;
+}
+
+.val {
+  color: var(--c-danger);
+  font-size: 12px;
+}
+
+.actions {
+  margin-top: var(--s-2);
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.errorCard .errorText {
+  color: var(--c-danger);
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+.full {
+  width: 100%;
+}
+
+.rowHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.userSearch {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.miniBtn {
+  border: 1px solid var(--c-border);
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: var(--r-3);
+  cursor: pointer;
+}
+
+.muted {
+  color: var(--c-muted);
+}

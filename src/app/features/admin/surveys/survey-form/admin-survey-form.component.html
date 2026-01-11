@@ -1,0 +1,123 @@
+<app-page
+  [title]="isEdit ? 'Anket Düzenle' : 'Yeni Anket'"
+  subtitle="Başlık, tarih aralığı ve açıklamayı düzenle."
+  maxWidth="lg"
+>
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+  </app-card>
+
+  <app-card padded="md" *ngIf="!loading">
+    <form [formGroup]="form" class="form">
+      <div class="field">
+        <label>Başlık</label>
+        <input
+          class="input"
+          formControlName="title"
+          placeholder="Örn: Ocak 2026 Memnuniyet Anketi"
+        />
+        <div class="val" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+          Başlık zorunlu.
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Açıklama</label>
+        <textarea
+          class="textarea"
+          rows="3"
+          formControlName="description"
+          placeholder="Opsiyonel"
+        ></textarea>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label>Başlangıç</label>
+          <input class="input" type="datetime-local" formControlName="startsAtUtc" />
+          <div
+            class="val"
+            *ngIf="form.get('startsAtUtc')?.touched && form.get('startsAtUtc')?.invalid"
+          >
+            Zorunlu.
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Bitiş</label>
+          <input class="input" type="datetime-local" formControlName="endsAtUtc" />
+          <div class="val" *ngIf="form.get('endsAtUtc')?.touched && form.get('endsAtUtc')?.invalid">
+            Zorunlu.
+          </div>
+        </div>
+      </div>
+      <!-- ✅ Sorular -->
+      <div class="field">
+        <label>Sorular</label>
+        <mat-form-field appearance="outline" class="full">
+          <mat-select formControlName="questionIds" multiple placeholder="En az 1 soru seç">
+            <mat-option *ngFor="let q of questions" [value]="q.id">
+              {{ q.text }} ({{ q.answerTemplateName }})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div
+          class="val"
+          *ngIf="form.get('questionIds')?.touched && form.get('questionIds')?.invalid"
+        >
+          En az 1 soru seçilmelidir.
+        </div>
+      </div>
+
+      <!-- ✅ Kullanıcılar -->
+      <div class="field">
+        <div class="rowHead">
+          <label>Kullanıcılar</label>
+
+          <div class="userSearch">
+            <input class="input" [(ngModel)]="userSearch" placeholder="Ara (email)..." />
+            <button type="button" class="miniBtn" (click)="loadLookups(userSearch)">Ara</button>
+            <button type="button" class="miniBtn" (click)="userSearch = ''; loadLookups()">
+              Sıfırla
+            </button>
+          </div>
+        </div>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-select formControlName="userIds" multiple placeholder="En az 1 Kullanıcı seç">
+            <mat-option *ngFor="let u of users" [value]="u.id">
+              {{ u.email }}
+              <span class="muted" *ngIf="u.roles.length">({{ u.roles.join(', ') }})</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="val" *ngIf="form.get('userIds')?.touched && form.get('userIds')?.invalid">
+          En az 1 Kullanıcı seçilmelidir.
+        </div>
+      </div>
+
+      <!-- ✅ Edit ise aktiflik -->
+      <div class="field" *ngIf="isEdit">
+        <mat-checkbox formControlName="isActive">Aktif</mat-checkbox>
+      </div>
+
+      <div class="actions">
+        <app-button
+          variant="primary"
+          size="md"
+          [loading]="saving"
+          text="Kaydet"
+          type="submit"
+          (click)="save()"
+        ></app-button>
+
+        <a routerLink="/admin/surveys">
+          <app-button variant="outline" size="md" text="Vazgeç"></app-button>
+        </a>
+      </div>
+    </form>
+  </app-card>
+</app-page>

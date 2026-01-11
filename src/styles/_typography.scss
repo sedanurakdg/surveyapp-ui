@@ -1,0 +1,13 @@
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: var(--line-md);
+}
+
+h1 { font-size: 26px; margin: 0 0 var(--s-4) 0; }
+h2 { font-size: 20px; margin: 0 0 var(--s-3) 0; }
+h3 { font-size: 16px; margin: 0 0 var(--s-2) 0; }
+
+.muted {
+  color: var(--color-text-muted);
+}

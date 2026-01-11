@@ -1,0 +1,19 @@
+<div class="alert" [ngClass]="'alert-' + variant" role="alert">
+  <mat-icon class="icon">{{ icon }}</mat-icon>
+
+  <div class="content">
+    <div class="title" *ngIf="title">{{ title }}</div>
+    <div class="message">{{ message }}</div>
+  </div>
+
+  <button
+    mat-icon-button
+    type="button"
+    class="close"
+    *ngIf="closable"
+    (click)="close()"
+    aria-label="Close"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,241 @@
+/* ==========================================================================
+   Material + Design Tokens Overrides (Corporate Dark)
+   File: src/styles/_material-overrides.scss
+   ========================================================================== */
+
+/* --- Material MDC base tokens (dark) --- */
+:root {
+  /* surfaces */
+  --mdc-theme-surface: var(--color-surface);
+  --mdc-theme-background: var(--color-bg);
+
+  /* text */
+  --mdc-theme-on-surface: var(--text);
+  --mdc-theme-on-primary: #0b0f19;
+
+  /* outline/border */
+  --mdc-outlined-text-field-outline-color: var(--color-border);
+  --mdc-outlined-text-field-hover-outline-color: rgba(255, 255, 255, 0.22);
+
+  /* label */
+  --mdc-outlined-text-field-label-text-color: var(--text-muted);
+  --mdc-outlined-text-field-hover-label-text-color: var(--text);
+  --mdc-outlined-text-field-focus-label-text-color: var(--brand-primary);
+
+  /* input text + placeholder */
+  --mdc-outlined-text-field-input-text-color: var(--text);
+  --mdc-outlined-text-field-input-text-placeholder-color: rgba(255, 255, 255, 0.55);
+
+  /* filled container (if used) */
+  --mdc-filled-text-field-container-color: rgba(255, 255, 255, 0.06);
+}
+
+/* --- App background & default typography --- */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+}
+
+/* ==========================================================================
+   HARD FIX: Input text görünmüyor (MDC + Chrome autofill)
+   ========================================================================== */
+
+/* Native inputs fallback */
+input,
+textarea,
+select {
+  color: var(--text);
+  background-color: transparent;
+}
+
+/* MDC container background (beyaz fill geliyorsa kır) */
+.mdc-text-field--outlined,
+.mdc-text-field--filled {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Material input element */
+.mat-mdc-input-element {
+  color: var(--text) !important;
+  background-color: transparent !important;
+  caret-color: var(--brand-primary) !important;
+
+  /* Chrome bazı durumlarda text'i burada boyuyor */
+  -webkit-text-fill-color: var(--text) !important;
+}
+
+/* Placeholder */
+.mat-mdc-input-element::placeholder {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* Label */
+.mat-mdc-form-field .mdc-floating-label {
+  color: var(--text-muted) !important;
+}
+
+/* Outline border */
+.mdc-notched-outline__leading,
+.mdc-notched-outline__notch,
+.mdc-notched-outline__trailing {
+  border-color: var(--color-border) !important;
+}
+
+/* Focus border */
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: rgba(79, 140, 255, 0.6) !important;
+}
+
+/* Chrome autofill beyazı kapat (transparent değil, koyu yüzeyle kapat) */
+input.mat-mdc-input-element:-webkit-autofill,
+textarea.mat-mdc-input-element:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: var(--text) !important;
+  caret-color: var(--brand-primary) !important;
+  box-shadow: 0 0 0px 1000px rgba(18, 26, 43, 0.95) inset !important; /* --color-surface */
+  transition: background-color 999999s ease-in-out 0s !important;
+}
+
+/* ==========================================================================
+   Common Material Surfaces
+   ========================================================================== */
+
+.mat-mdc-card,
+.mat-mdc-dialog-surface,
+.mat-mdc-menu-panel,
+.mat-mdc-select-panel {
+  background: var(--color-surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Form fields */
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mat-mdc-text-field-wrapper {
+  border-radius: var(--radius-md) !important;
+}
+
+/* Select text color */
+.mat-mdc-select-value-text {
+  color: var(--text) !important;
+}
+
+/* Divider */
+.mat-divider {
+  border-top-color: var(--color-border) !important;
+}
+
+/* Focus ring - accessible */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Table */
+.mat-mdc-table {
+  background: transparent !important;
+}
+
+.mat-mdc-row,
+.mat-mdc-header-row {
+  background: transparent !important;
+}
+
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  border-bottom-color: var(--color-border) !important;
+  color: var(--text) !important;
+}
+
+/* Helpers */
+.text-primary {
+  color: var(--brand-primary) !important;
+}
+
+.bg-primary {
+  background: var(--brand-primary) !important;
+}
+
+a {
+  color: var(--brand-primary);
+}
+
+/* ==========================================================================
+   Primary color (Material) = token (birebir)
+   ========================================================================== */
+
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-unelevated-button.mat-primary {
+  background-color: var(--brand-primary) !important;
+  color: #0b0f19 !important;
+}
+
+.mat-mdc-outlined-button.mat-primary {
+  border-color: var(--brand-primary) !important;
+  color: var(--brand-primary) !important;
+}
+
+.mat-mdc-button.mat-primary {
+  color: var(--brand-primary) !important;
+}
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: var(--brand-primary);
+}
+/* ========= BUTTON LABEL FIX (text görünmüyor) ========= */
+
+/* Primary filled buttons: label mutlaka koyu görünsün */
+.mat-mdc-raised-button.mat-primary .mdc-button__label,
+.mat-mdc-unelevated-button.mat-primary .mdc-button__label {
+  color: #0b0f19 !important;
+}
+
+/* Outlined primary */
+.mat-mdc-outlined-button.mat-primary .mdc-button__label {
+  color: var(--brand-primary) !important;
+}
+
+/* Text primary */
+.mat-mdc-button.mat-primary .mdc-button__label {
+  color: var(--brand-primary) !important;
+}
+
+/* Her ihtimale karşı: label görünürlüğü */
+.mdc-button__label {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+/* ========= BUTTON LABEL HARD FIX ========= */
+
+/* Filled / Raised primary label rengi (MDC token) */
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-unelevated-button.mat-primary {
+  --mdc-filled-button-label-text-color: #0b0f19 !important;
+  --mdc-filled-button-container-color: var(--brand-primary) !important;
+}
+
+/* Eğer label span'e başka css bulaşıyorsa, zorla görünür yap */
+.mat-mdc-raised-button .mdc-button__label,
+.mat-mdc-unelevated-button .mdc-button__label,
+.mat-mdc-outlined-button .mdc-button__label,
+.mat-mdc-button .mdc-button__label {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: inherit !important;
+}

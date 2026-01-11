@@ -1,0 +1,52 @@
+<!-- TEXT -->
+<button
+  *ngIf="variant === 'text'"
+  mat-button
+  [attr.type]="type"
+  [disabled]="isDisabled || loading"
+  [class.fullWidth]="fullWidth"
+  [ngClass]="['btn', 'btn-' + variant, 'btn-' + size]"
+>
+  <span class="btnLabel">{{ text }}</span>
+</button>
+
+<!-- OUTLINE -->
+<button
+  *ngIf="variant === 'outline'"
+  mat-stroked-button
+  color="primary"
+  [attr.type]="type"
+  [disabled]="isDisabled || loading"
+  [class.fullWidth]="fullWidth"
+  [ngClass]="['btn', 'btn-' + variant, 'btn-' + size]"
+>
+  <span class="btnLabel">{{ text }}</span>
+</button>
+
+<!-- PRIMARY -->
+<button
+  *ngIf="variant === 'primary'"
+  mat-raised-button
+  color="primary"
+  [attr.type]="type"
+  [disabled]="isDisabled || loading"
+  [class.fullWidth]="fullWidth"
+  [ngClass]="['btn', 'btn-' + variant, 'btn-' + size]"
+>
+  <span class="btnLabel" [class.hidden]="loading">{{ text }}</span>
+  <mat-progress-spinner *ngIf="loading" class="spinner" mode="indeterminate" [diameter]="16"></mat-progress-spinner>
+</button>
+
+<!-- DANGER -->
+<button
+  *ngIf="variant === 'danger'"
+  mat-raised-button
+  color="warn"
+  [attr.type]="type"
+  [disabled]="isDisabled || loading"
+  [class.fullWidth]="fullWidth"
+  [ngClass]="['btn', 'btn-' + variant, 'btn-' + size]"
+>
+  <span class="btnLabel" [class.hidden]="loading">{{ text }}</span>
+  <mat-progress-spinner *ngIf="loading" class="spinner" mode="indeterminate" [diameter]="16"></mat-progress-spinner>
+</button>

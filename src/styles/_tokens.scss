@@ -1,0 +1,42 @@
+@use './brand' as brand;
+
+:root {
+  /* Brand */
+  --brand-primary: #{brand.$brand-primary};
+  --brand-secondary: #{brand.$brand-secondary};
+  color-scheme: dark;
+  /* Surfaces */
+  --color-bg: #0b0f19;
+  --color-surface: #121a2b;
+  --color-surface-2: #18233a;
+  --color-border: rgba(255, 255, 255, 0.12);
+
+  /* Text */
+  --text: rgba(255, 255, 255, 0.92);
+  --text-muted: rgba(255, 255, 255, 0.72);
+
+  /* Semantic */
+  --success: #2ecc71;
+  --warning: #f5a524;
+  --danger: #ff4d4f;
+
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, 'Noto Sans';
+  --text-md: 14px;
+
+  /* Shape */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Spacing */
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-6: 24px;
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px rgba(79, 140, 255, 0.3);
+  --dur-1: 120ms;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}

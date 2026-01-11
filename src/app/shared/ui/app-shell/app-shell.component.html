@@ -1,0 +1,48 @@
+<mat-sidenav-container class="shell">
+  <mat-sidenav class="sidenav" mode="side" opened>
+    <div class="brand">
+      <div class="brandTitle">{{ title }}</div>
+      <div class="brandSub">SurveyApp</div>
+    </div>
+
+    <mat-nav-list class="nav">
+      <ng-container *ngFor="let it of items">
+        <a
+          mat-list-item
+          *ngIf="canShow(it)"
+          [routerLink]="it.route"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: it.exact ?? false }"
+        >
+          <mat-icon matListItemIcon *ngIf="it.icon">{{ it.icon }}</mat-icon>
+          <span matListItemTitle>{{ it.label }}</span>
+        </a>
+      </ng-container>
+    </mat-nav-list>
+
+    <div class="spacer"></div>
+
+    <div class="footer">
+      <button mat-stroked-button class="logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Çıkış
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content">
+    <mat-toolbar class="toolbar" color="primary">
+      <span class="toolbarTitle">{{ title }}</span>
+      <span class="toolbarSpacer"></span>
+
+      <button mat-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Çıkış
+      </button>
+    </mat-toolbar>
+
+    <main class="page">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

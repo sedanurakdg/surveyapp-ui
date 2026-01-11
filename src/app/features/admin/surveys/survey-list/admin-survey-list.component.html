@@ -1,0 +1,42 @@
+<app-page title="Anketler" subtitle="Sistem anketlerini yönet." maxWidth="lg">
+  <div class="topActions">
+    <a routerLink="/admin/surveys/new">
+      <app-button variant="primary" size="md" text="Yeni Anket"></app-button>
+    </a>
+  </div>
+
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+    <div class="actions">
+      <app-button variant="outline" size="sm" text="Tekrar Dene" (click)="load()"></app-button>
+    </div>
+  </app-card>
+
+  <app-card padded="md" *ngIf="!loading && !error">
+    <div class="empty" *ngIf="items.length === 0">Henüz anket yok.</div>
+
+    <div class="list" *ngIf="items.length > 0">
+      <div class="row" *ngFor="let s of items">
+        <div class="main">
+          <div class="title">{{ s.title }}</div>
+          <div class="meta">
+            <span>Başlangıç: {{ s.startsAtUtc | date: 'dd.MM.yyyy HH:mm' }}</span>
+            <span>Bitiş: {{ s.endsAtUtc | date: 'dd.MM.yyyy HH:mm' }}</span>
+          </div>
+          <div class="desc" *ngIf="s.description">{{ s.description }}</div>
+        </div>
+
+        <div class="rowActions">
+          <a [routerLink]="['/admin/surveys', s.id]">
+            <app-button variant="outline" size="sm" text="Detay"></app-button>
+          </a>
+          <a [routerLink]="['/admin/surveys', s.id, 'edit']">
+            <app-button variant="outline" size="sm" text="Düzenle"></app-button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </app-card>
+</app-page>

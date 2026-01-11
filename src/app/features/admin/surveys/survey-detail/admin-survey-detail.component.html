@@ -1,0 +1,38 @@
+<app-page
+  [title]="survey?.title || 'Anket Detayı'"
+  subtitle="Anket detayını görüntüle ve yönet."
+  maxWidth="lg"
+>
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+    <div class="actions">
+      <app-button variant="outline" size="sm" text="Tekrar Dene" (click)="load()"></app-button>
+      <a routerLink="/admin/surveys" class="link">Listeye dön</a>
+    </div>
+  </app-card>
+
+  <ng-container *ngIf="!loading && !error && survey">
+    <app-card padded="md">
+      <div class="meta">
+        <div><b>Başlangıç:</b> {{ survey.startsAtUtc | date:'dd.MM.yyyy HH:mm' }}</div>
+        <div><b>Bitiş:</b> {{ survey.endsAtUtc | date:'dd.MM.yyyy HH:mm' }}</div>
+      </div>
+
+      <div class="desc" *ngIf="survey.description">{{ survey.description }}</div>
+
+      <div class="actions">
+        <a [routerLink]="['/admin/surveys', survey.id, 'edit']">
+          <app-button variant="primary" size="md" text="Düzenle"></app-button>
+        </a>
+
+        <a [routerLink]="['/admin/surveys']">
+          <app-button variant="outline" size="md" text="Listeye Dön"></app-button>
+        </a>
+
+        <app-button variant="outline" size="md" text="Sil" (click)="delete()"></app-button>
+      </div>
+    </app-card>
+  </ng-container>
+</app-page>

@@ -1,0 +1,28 @@
+.meta {
+  display: grid;
+  gap: var(--s-2);
+  color: var(--c-muted);
+  font-size: 13px;
+}
+
+.desc {
+  margin-top: var(--s-3);
+  color: var(--c-muted);
+  font-size: 13px;
+}
+
+.actions {
+  margin-top: var(--s-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.link {
+  color: var(--c-muted);
+  text-decoration: none;
+}
+
+.errorCard .errorText {
+  color: var(--c-danger);
+}

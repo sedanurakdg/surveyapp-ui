@@ -1,0 +1,23 @@
+:host { display: inline-block; }
+
+button.fullWidth { width: 100%; }
+
+.btnLabel {
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-weight: 600;
+}
+
+/* Primary filled */
+:host ::ng-deep button.mat-mdc-raised-button.mat-primary .btnLabel,
+:host ::ng-deep button.mat-mdc-unelevated-button.mat-primary .btnLabel {
+  color: #0b0f19 !important;
+}
+
+/* Warn filled */
+:host ::ng-deep button.mat-mdc-raised-button.mat-warn .btnLabel {
+  color: rgba(255,255,255,0.92) !important;
+}
+
+.spinner { margin-left: 10px; vertical-align: middle; }
+.hidden { opacity: 0; }

@@ -1,0 +1,14 @@
+<mat-card class="card" [ngClass]="['pad-' + padded]">
+  <div class="header" *ngIf="title || subtitle">
+    <div class="titles">
+      <div class="title" *ngIf="title">{{ title }}</div>
+      <div class="subtitle" *ngIf="subtitle">{{ subtitle }}</div>
+    </div>
+
+    <div class="toolbar">
+      <ng-content select="[cardToolbar]"></ng-content>
+    </div>
+  </div>
+
+  <ng-content></ng-content>
+</mat-card>

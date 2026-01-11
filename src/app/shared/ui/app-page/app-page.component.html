@@ -1,0 +1,14 @@
+<div class="container" [ngClass]="'mw-' + maxWidth">
+  <div class="pageHeader" *ngIf="title || subtitle">
+    <div>
+      <h2 class="pageTitle" *ngIf="title">{{ title }}</h2>
+      <div class="pageSubtitle" *ngIf="subtitle">{{ subtitle }}</div>
+    </div>
+
+    <div class="pageActions">
+      <ng-content select="[pageActions]"></ng-content>
+    </div>
+  </div>
+
+  <ng-content></ng-content>
+</div>
