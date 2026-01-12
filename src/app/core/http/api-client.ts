@@ -17,26 +17,19 @@ export class ApiClient {
   get<T>(path: string, query?: Query) {
     return this.http.get<T>(this.url(path), {
       params: this.toParams(query),
-      headers: this.authHeaders(path),
     });
   }
 
   post<T>(path: string, body: unknown) {
-    return this.http.post<T>(this.url(path), body, {
-      headers: this.authHeaders(path),
-    });
+    return this.http.post<T>(this.url(path), body, {});
   }
 
   put<T>(path: string, body: unknown) {
-    return this.http.put<T>(this.url(path), body, {
-      headers: this.authHeaders(path),
-    });
+    return this.http.put<T>(this.url(path), body, {});
   }
 
   delete<T>(path: string) {
-    return this.http.delete<T>(this.url(path), {
-      headers: this.authHeaders(path),
-    });
+    return this.http.delete<T>(this.url(path), {});
   }
 
   call<TRes, TReq>(ep: Endpoint<TRes, TReq>, body?: TReq, query?: Record<string, any>) {
@@ -65,15 +58,6 @@ export class ApiClient {
       params = params.set(k, String(v));
     }
     return params;
-  }
-
-  private authHeaders(path: string): HttpHeaders | undefined {
-    const token = this.auth.token(); // computed -> function call
-
-    if (!token) return undefined;
-    if (this.isAnonymousPath(path)) return undefined;
-
-    return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
 
   private isAnonymousPath(path: string): boolean {

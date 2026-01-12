@@ -10,11 +10,10 @@ import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withComponentInputBinding(), withEnabledBlockingInitialNavigation()),
-    provideHttpClient(withInterceptors([authInterceptor, errorInterceptor])),
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
-  { provide: APP_CONFIG, useValue: { apiBaseUrl: environment.apiBaseUrl } }
-
-  ],
+  provideZoneChangeDetection({ eventCoalescing: true }),
+  provideRouter(routes, withComponentInputBinding(), withEnabledBlockingInitialNavigation()),
+  provideHttpClient(withInterceptors([authInterceptor, errorInterceptor])),
+  { provide: ErrorHandler, useClass: GlobalErrorHandler },
+  { provide: APP_CONFIG, useValue: { apiBaseUrl: environment.apiBaseUrl } },
+],
 };
