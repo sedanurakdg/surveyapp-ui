@@ -1,0 +1,53 @@
+<app-page
+  [title]="dto ? dto.email : 'Cevaplar'"
+  subtitle="Kullanıcının verdiği cevaplar (read-only)."
+  maxWidth="lg"
+>
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+    <div class="actions">
+      <app-button variant="outline" size="sm" text="Tekrar Dene" (click)="load()"></app-button>
+      <a [routerLink]="['/admin/reports/surveys', surveyId, 'users']" class="backBtn">
+        <app-button variant="outline" size="sm" text="Kullanıcılara dön"></app-button>
+      </a>
+    </div>
+  </app-card>
+
+  <ng-container *ngIf="!loading && !error && dto">
+    <!-- ✅ Kompakt header -->
+    <app-card padded="md" class="headerCard">
+      <div class="headerRow">
+        <div class="headerLeft">
+          <div class="email">{{ dto.email }}</div>
+          <div class="meta" *ngIf="dto.submittedAtUtc">
+            Gönderim: {{ dto.submittedAtUtc | date:'dd.MM.yyyy HH:mm' }}
+          </div>
+        </div>
+
+        <a [routerLink]="['/admin/reports/surveys', surveyId, 'users']" class="backBtn">
+          <app-button variant="outline" size="sm" text="Geri"></app-button>
+        </a>
+      </div>
+    </app-card>
+
+    <!-- ✅ Soru kartları -->
+    <div class="qList" *ngIf="dto.answers.length > 0">
+      <app-card padded="md" class="qCard" *ngFor="let a of dto.answers; trackBy: trackByQuestionId">
+        <div class="qText">{{ a.questionText }}</div>
+
+        <div class="picked">
+          <span class="pickedChip">
+            {{ a.selectedOptionText }}
+            <span class="idx">#{{ a.selectedOptionIndex }}</span>
+          </span>
+        </div>
+      </app-card>
+    </div>
+
+    <app-card padded="md" *ngIf="dto.answers.length === 0">
+      Cevap bulunamadı.
+    </app-card>
+  </ng-container>
+</app-page>

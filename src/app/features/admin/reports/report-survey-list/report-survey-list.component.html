@@ -1,0 +1,44 @@
+<app-page title="Anket Raporları" subtitle="Anket bazlı durum ve kullanıcı raporları." maxWidth="lg">
+  <app-card padded="md" class="toolbar">
+    <input class="input" [formControl]="searchCtrl" placeholder="Anket adı ile ara..." />
+    <app-button variant="outline" size="sm" text="Ara" (click)="load()"></app-button>
+    <app-button variant="outline" size="sm" text="Sıfırla" (click)="clear()"></app-button>
+  </app-card>
+
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+    <div class="actions">
+      <app-button variant="outline" size="sm" text="Tekrar Dene" (click)="load()"></app-button>
+    </div>
+  </app-card>
+
+  <app-card padded="md" *ngIf="!loading && !error">
+    <div class="empty" *ngIf="items.length === 0">Kayıt bulunamadı.</div>
+
+    <div class="list" *ngIf="items.length > 0">
+      <div class="row" *ngFor="let s of items">
+        <div class="main">
+          <div class="title">{{ s.title }}</div>
+          <div class="meta">
+            <span>Başlangıç: {{ s.startsAtUtc | date:'dd.MM.yyyy HH:mm' }}</span>
+            <span>Bitiş: {{ s.endsAtUtc | date:'dd.MM.yyyy HH:mm' }}</span>
+          </div>
+
+          <div class="counts">
+            <span class="chip">Atanan: {{ s.assignedCount }}</span>
+            <span class="chip ok">Gönderilen: {{ s.completedCount }}</span>
+            <span class="chip warn">Bekleyen: {{ s.pendingCount }}</span>
+          </div>
+        </div>
+
+        <div class="rowActions">
+          <a [routerLink]="['/admin/reports/surveys', s.surveyId, 'users']">
+            <app-button variant="primary" size="sm" text="Kullanıcılar"></app-button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </app-card>
+</app-page>

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { FormBuilder,FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -24,7 +24,7 @@ import { AdminQuestionListDto, AdminUserDto } from '../looksup/admin-lookups.api
     AppButtonComponent,
     MatSelectModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './admin-survey-form.component.html',
   styleUrls: ['./admin-survey-form.component.scss'],
@@ -57,11 +57,11 @@ export class AdminSurveyFormComponent {
     endsAtUtc: ['', Validators.required],
     isActive: [true],
     questionIds: this.fb.control<number[]>([], { validators: [Validators.required] }),
-    userIds: this.fb.control<number[]>([]),
+    userIds: this.fb.control<number[]>([], { validators: [Validators.required] }),
   });
 
   async ngOnInit() {
-    await this.loadLookups();
+    this.loadLookups().catch(() => {});
     if (this.isEdit && this.id) {
       await this.loadForEdit(this.id);
     } else {
@@ -75,6 +75,7 @@ export class AdminSurveyFormComponent {
     }
   }
   async loadLookups(search?: string) {
+    console.log(search)
     this.loadingLookups = true;
     try {
       const [qs, us] = await Promise.all([
@@ -92,11 +93,6 @@ export class AdminSurveyFormComponent {
     const pad = (n: number) => String(n).padStart(2, '0');
     return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
-
-  private toIsoFromLocalInput(v: string): string {
-    return v;
-  }
-
   async loadForEdit(id: number) {
     this.loading = true;
     this.error = null;

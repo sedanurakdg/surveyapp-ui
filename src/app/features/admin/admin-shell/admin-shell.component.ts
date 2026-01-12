@@ -15,5 +15,6 @@ export class AdminShellComponent {
 
   items: AppShellNavItem[] = [
     { label: 'Anketler', icon: 'assignment', route: '/admin/surveys', exact: true },
+    { label: 'Raporlar', icon: 'analytics', route: '/admin/reports/surveys', exact: true },
   ];
 }

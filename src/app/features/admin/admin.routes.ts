@@ -37,6 +37,27 @@ export const ADMIN_ROUTES: Routes = [
             (m) => m.AdminSurveyFormComponent,
           ),
       },
+      {
+        path: 'reports/surveys',
+        loadComponent: () =>
+          import('./reports/report-survey-list/report-survey-list.component').then(
+            (m) => m.ReportSurveyListComponent,
+          ),
+      },
+      {
+        path: 'reports/surveys/:surveyId/users',
+        loadComponent: () =>
+          import('./reports/report-survey-users/report-survey-users.component').then(
+            (m) => m.ReportSurveyUsersComponent,
+          ),
+      },
+      {
+        path: 'reports/surveys/:surveyId/users/:userId',
+        loadComponent: () =>
+          import('./reports/report-user-answers/report-user-answers.component').then(
+            (m) => m.ReportUserAnswersComponent,
+          ),
+      },
 
       { path: '', pathMatch: 'full', redirectTo: 'surveys' },
     ],

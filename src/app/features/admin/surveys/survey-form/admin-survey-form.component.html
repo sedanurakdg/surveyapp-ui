@@ -78,7 +78,12 @@
           <label>Kullanıcılar</label>
 
           <div class="userSearch">
-            <input class="input" [(ngModel)]="userSearch" placeholder="Ara (email)..." />
+            <input
+              class="input"
+              [(ngModel)]="userSearch"
+              [ngModelOptions]="{ standalone: true }"
+              placeholder="Ara (email)..."
+            />
             <button type="button" class="miniBtn" (click)="loadLookups(userSearch)">Ara</button>
             <button type="button" class="miniBtn" (click)="userSearch = ''; loadLookups()">
               Sıfırla
@@ -87,7 +92,7 @@
         </div>
 
         <mat-form-field appearance="outline" class="full">
-          <mat-select formControlName="userIds" multiple placeholder="En az 1 Kullanıcı seç">
+          <mat-select formControlName="userIds" multiple placeholder="En az 1 kullanıcı seç">
             <mat-option *ngFor="let u of users" [value]="u.id">
               {{ u.email }}
               <span class="muted" *ngIf="u.roles.length">({{ u.roles.join(', ') }})</span>

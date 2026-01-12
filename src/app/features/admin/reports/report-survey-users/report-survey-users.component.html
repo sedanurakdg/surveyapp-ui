@@ -1,0 +1,67 @@
+<app-page
+  [title]="dto ? 'Kullanıcılar - ' + dto.title : 'Kullanıcılar'"
+  subtitle="Ankete atanmış kullanıcılar ve durumları."
+  maxWidth="lg"
+>
+  <app-card padded="md" class="toolbar">
+    <div class="toolbarLeft">
+      <input class="input" [formControl]="searchCtrl" placeholder="Email ile ara..." />
+      <div class="btns">
+        <app-button variant="outline" size="sm" text="Ara" (click)="load()"></app-button>
+        <app-button variant="outline" size="sm" text="Sıfırla" (click)="clear()"></app-button>
+      </div>
+    </div>
+
+    <a [routerLink]="['/admin/reports/surveys']" class="backBtn">
+      <app-button variant="outline" size="sm" text="Raporlara dön"></app-button>
+    </a>
+  </app-card>
+
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+    <div class="actions">
+      <app-button variant="outline" size="sm" text="Tekrar Dene" (click)="load()"></app-button>
+    </div>
+  </app-card>
+
+  <app-card padded="md" *ngIf="!loading && !error">
+    <div class="empty" *ngIf="items.length === 0">Kayıt bulunamadı.</div>
+
+    <div class="list" *ngIf="items.length > 0">
+      <div class="row" *ngFor="let u of items; trackBy: trackByUserId">
+        <div class="main">
+          <div class="title">{{ u.email }}</div>
+
+          <div class="meta">
+            <span class="chip" [class.ok]="u.completed" [class.warn]="!u.completed">
+              {{ u.completed ? 'Gönderildi' : 'Bekliyor' }}
+            </span>
+
+            <span class="muted" *ngIf="u.submittedAtUtc">
+              Gönderim: {{ u.submittedAtUtc | date: 'dd.MM.yyyy HH:mm' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="rowActions">
+          <a
+            *ngIf="u.completed"
+            [routerLink]="['/admin/reports/surveys', surveyId, 'users', u.userId]"
+          >
+            <app-button variant="primary" size="sm" text="Cevaplar"></app-button>
+          </a>
+
+          <app-button
+            *ngIf="!u.completed"
+            variant="outline"
+            size="sm"
+            text="Cevap yok"
+            [disabled]="true"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </app-card>
+</app-page>

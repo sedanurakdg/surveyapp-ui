@@ -1,0 +1,93 @@
+.headerCard {
+  padding: var(--s-3);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.headerLeft {
+  min-width: 0;
+}
+
+.email {
+  font-weight: 800;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  margin-top: 4px;
+  color: var(--c-muted);
+  font-size: 12px;
+}
+
+.backBtn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.qList {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.qCard {
+  border: 1px solid var(--c-border);
+}
+
+.qText {
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.picked {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.pickedChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(33, 150, 243, 0.55);
+  background: rgba(33, 150, 243, 0.10);
+}
+
+.idx {
+  opacity: 0.8;
+  font-size: 12px;
+}
+
+.errorCard .errorText {
+  color: var(--c-danger);
+}
+
+.actions {
+  margin-top: var(--s-3);
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+  .headerRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .backBtn {
+    justify-content: flex-end;
+  }
+}

@@ -12,7 +12,6 @@ export class AdminLookupsService {
   }
 
   listUsers(search?: string) {
-    // backend destekli: ?search=
     return this.api.call(AdminLookupsApi.users, undefined, { search });
   }
 }
