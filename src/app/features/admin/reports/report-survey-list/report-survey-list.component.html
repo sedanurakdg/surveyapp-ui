@@ -1,8 +1,16 @@
-<app-page title="Anket Raporları" subtitle="Anket bazlı durum ve kullanıcı raporları." maxWidth="lg">
+<app-page
+  title="Anket Raporları"
+  subtitle="Anket bazlı durum ve kullanıcı raporları."
+  maxWidth="lg"
+>
   <app-card padded="md" class="toolbar">
-    <input class="input" [formControl]="searchCtrl" placeholder="Anket adı ile ara..." />
-    <app-button variant="outline" size="sm" text="Ara" (click)="load()"></app-button>
-    <app-button variant="outline" size="sm" text="Sıfırla" (click)="clear()"></app-button>
+    <div class="toolbarLeft">
+      <input class="input" [formControl]="searchCtrl" placeholder="Email ile ara..." />
+      <div class="btns">
+        <app-button variant="outline" size="sm" text="Ara" (click)="load()"></app-button>
+        <app-button variant="outline" size="sm" text="Sıfırla" (click)="clear()"></app-button>
+      </div>
+    </div>
   </app-card>
 
   <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
@@ -22,8 +30,8 @@
         <div class="main">
           <div class="title">{{ s.title }}</div>
           <div class="meta">
-            <span>Başlangıç: {{ s.startsAtUtc | date:'dd.MM.yyyy HH:mm' }}</span>
-            <span>Bitiş: {{ s.endsAtUtc | date:'dd.MM.yyyy HH:mm' }}</span>
+            <span>Başlangıç: {{ s.startsAtUtc | date: 'dd.MM.yyyy HH:mm' }}</span>
+            <span>Bitiş: {{ s.endsAtUtc | date: 'dd.MM.yyyy HH:mm' }}</span>
           </div>
 
           <div class="counts">

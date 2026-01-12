@@ -1,0 +1,117 @@
+<app-page
+  [title]="isEdit ? 'Şablon Düzenle' : 'Yeni Şablon'"
+  subtitle="Cevap seçenek setini oluştur veya güncelle."
+  maxWidth="lg"
+>
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+    <div class="actions">
+      <app-button
+        variant="outline"
+        size="sm"
+        text="Tekrar Dene"
+        (click)="loadForEdit(id!)"
+      ></app-button>
+      <a [routerLink]="['/admin/answer-templates']" class="backBtn">
+        <app-button variant="outline" size="sm" text="Listeye dön"></app-button>
+      </a>
+    </div>
+  </app-card>
+
+  <ng-container *ngIf="!loading && !error">
+    <div [formGroup]="form">
+      <app-card padded="md" class="formCard">
+        <div class="grid">
+          <div class="field">
+            <label>Şablon Adı</label>
+            <input
+              class="input"
+              type="text"
+              formControlName="name"
+              placeholder="Örn: Memnuniyet 1-5"
+            />
+            <div class="val" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+              Şablon adı zorunludur.
+            </div>
+          </div>
+
+          <div class="field right" *ngIf="isEdit">
+            <label>&nbsp;</label>
+            <div class="checkRow">
+              <input type="checkbox" formControlName="isActive" />
+              <span>Aktif</span>
+            </div>
+          </div>
+        </div>
+      </app-card>
+
+      <app-card padded="md" class="formCard">
+        <div class="sectionHead">
+          <div>
+            <div class="sectionTitle">Seçenekler</div>
+            <div class="sectionSub">
+              En az 2 seçenek olmalı. Sıra, anket ekranında gösterim sırasıdır.
+            </div>
+          </div>
+
+          <app-button
+            variant="primary"
+            size="sm"
+            text="Seçenek Ekle"
+            (click)="addOption()"
+          ></app-button>
+        </div>
+
+        <div formArrayName="options" class="optListInner">
+          <div class="optRow" *ngFor="let g of options.controls; let i = index" [formGroupName]="i">
+            <div class="optIdx">{{ i + 1 }}</div>
+
+            <div class="optMain">
+              <input class="input" type="text" formControlName="text" placeholder="Seçenek metni" />
+              <div class="val" *ngIf="g.get('text')?.touched && g.get('text')?.invalid">
+                Seçenek metni zorunludur.
+              </div>
+            </div>
+
+            <div class="optActions">
+              <button type="button" class="miniBtn" (click)="moveUp(i)" [disabled]="i === 0">
+                ↑
+              </button>
+              <button
+                type="button"
+                class="miniBtn"
+                (click)="moveDown(i)"
+                [disabled]="i === options.length - 1"
+              >
+                ↓
+              </button>
+              <button type="button" class="miniBtn danger" (click)="removeOption(i)">Sil</button>
+            </div>
+          </div>
+        </div>
+      </app-card>
+
+      <app-card padded="md" class="footerCard">
+        <div class="footerActions">
+          <app-button
+            variant="primary"
+            size="sm"
+            [text]="saving ? 'Kaydediliyor...' : 'Kaydet'"
+            (click)="save()"
+            [disabled]="saving"
+          ></app-button>
+
+          <app-button
+            variant="outline"
+            size="sm"
+            text="Vazgeç"
+            (click)="cancel()"
+            [disabled]="saving"
+          ></app-button>
+        </div>
+      </app-card>
+    </div>
+  </ng-container>
+</app-page>

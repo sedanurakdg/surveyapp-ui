@@ -58,6 +58,51 @@ export const ADMIN_ROUTES: Routes = [
             (m) => m.ReportUserAnswersComponent,
           ),
       },
+      // Answer Templates
+      {
+        path: 'answer-templates',
+        loadComponent: () =>
+          import('./answer-templates/template-list/template-list.component').then(
+            (m) => m.TemplateListComponent,
+          ),
+      },
+      {
+        path: 'answer-templates/new',
+        loadComponent: () =>
+          import('./answer-templates/template-form/template-form.component').then(
+            (m) => m.TemplateFormComponent,
+          ),
+      },
+      {
+        path: 'answer-templates/:id/edit',
+        loadComponent: () =>
+          import('./answer-templates/template-form/template-form.component').then(
+            (m) => m.TemplateFormComponent,
+          ),
+      },
+
+      // Questions
+      {
+        path: 'questions',
+        loadComponent: () =>
+          import('./questions/question-list/question-list.component').then(
+            (m) => m.QuestionListComponent,
+          ),
+      },
+      {
+        path: 'questions/new',
+        loadComponent: () =>
+          import('./questions/question-form/question-form.component').then(
+            (m) => m.QuestionFormComponent,
+          ),
+      },
+      {
+        path: 'questions/:id/edit',
+        loadComponent: () =>
+          import('./questions/question-form/question-form.component').then(
+            (m) => m.QuestionFormComponent,
+          ),
+      },
 
       { path: '', pathMatch: 'full', redirectTo: 'surveys' },
     ],

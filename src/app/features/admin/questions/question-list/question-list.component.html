@@ -1,0 +1,41 @@
+<app-page title="Sorular" subtitle="Soru bankasını yönet" maxWidth="lg">
+  <div class="topActions">
+    <a [routerLink]="['/admin/questions/new']">
+      <app-button variant="primary" size="sm" text="Yeni Soru"></app-button>
+    </a>
+  </div>
+
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+    <app-button variant="outline" size="sm" text="Tekrar Dene" (click)="load()"></app-button>
+  </app-card>
+
+  <app-card padded="md" *ngIf="!loading && !error">
+    <div class="empty" *ngIf="items.length === 0">Kayıt yok.</div>
+
+    <div class="list" *ngIf="items.length > 0">
+      <div class="row" *ngFor="let q of items">
+        <div class="main">
+          <div class="title">{{ q.text }}</div>
+
+          <div class="meta">
+            <span class="chip">{{ q.answerTemplateName }}</span>
+            <span class="chip" [class.ok]="q.isActive" [class.warn]="!q.isActive">
+              {{ q.isActive ? 'Aktif' : 'Pasif' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a [routerLink]="['/admin/questions', q.id, 'edit']">
+            <app-button variant="outline" size="sm" text="Düzenle"></app-button>
+          </a>
+
+          <app-button variant="outline" size="sm" text="Sil" (click)="remove(q.id)"></app-button>
+        </div>
+      </div>
+    </div>
+  </app-card>
+</app-page>

@@ -47,7 +47,7 @@ export class AdminSurveyDetailComponent {
   async delete() {
     if (!this.survey) return;
 
-    const ok = confirm(`"${this.survey.title}" anketini silmek istiyor musun?`);
+    const ok = confirm(`"${this.survey.title}" anketini silmek istiyor musunuz?`);
     if (!ok) return;
 
     try {

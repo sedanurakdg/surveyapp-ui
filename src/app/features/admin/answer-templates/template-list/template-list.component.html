@@ -1,0 +1,39 @@
+<app-page title="Cevap Şablonları" subtitle="Seçenek setlerini yönet" maxWidth="lg">
+  <div class="topActions">
+    <a [routerLink]="['/admin/answer-templates/new']">
+      <app-button variant="primary" size="sm" text="Yeni Şablon"></app-button>
+    </a>
+  </div>
+
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+    <app-button variant="outline" size="sm" text="Tekrar Dene" (click)="load()"></app-button>
+  </app-card>
+
+  <app-card padded="md" *ngIf="!loading && !error">
+    <div class="empty" *ngIf="items.length === 0">Kayıt yok.</div>
+
+    <div class="list" *ngIf="items.length > 0">
+      <div class="row" *ngFor="let x of items">
+        <div class="main">
+          <div class="title">{{ x.name }}</div>
+          <div class="meta">
+            <span class="chip">{{ x.optionCount }} seçenek</span>
+            <span class="chip" [class.ok]="x.isActive" [class.warn]="!x.isActive">
+              {{ x.isActive ? 'Aktif' : 'Pasif' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a [routerLink]="['/admin/answer-templates', x.id, 'edit']">
+            <app-button variant="outline" size="sm" text="Düzenle"></app-button>
+          </a>
+          <app-button variant="outline" size="sm" text="Sil" (click)="remove(x.id)"></app-button>
+        </div>
+      </div>
+    </div>
+  </app-card>
+</app-page>

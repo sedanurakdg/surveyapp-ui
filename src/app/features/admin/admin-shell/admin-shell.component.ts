@@ -16,5 +16,7 @@ export class AdminShellComponent {
   items: AppShellNavItem[] = [
     { label: 'Anketler', icon: 'assignment', route: '/admin/surveys', exact: true },
     { label: 'Raporlar', icon: 'analytics', route: '/admin/reports/surveys', exact: true },
+    { label: 'Sorular', icon: 'help', route: '/admin/questions', exact: false },
+    { label: 'Cevap Şablonları', icon: 'tune', route: '/admin/answer-templates', exact: false },
   ];
 }

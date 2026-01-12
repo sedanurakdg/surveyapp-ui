@@ -1,0 +1,78 @@
+.topActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--s-3);
+}
+
+.list {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-3);
+}
+
+.main {
+  min-width: 0;
+}
+
+.title {
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.meta {
+  margin-top: 8px;
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.chip {
+  padding: 6px 10px;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--c-muted);
+}
+
+.chip.ok {
+  background: rgba(0,128,0,0.08);
+  border-color: rgba(0,128,0,0.35);
+  color: rgba(0,128,0,0.95);
+}
+
+.chip.warn {
+  background: rgba(255,165,0,0.08);
+  border-color: rgba(255,165,0,0.35);
+  color: rgba(255,165,0,0.95);
+}
+
+.actions {
+  display: flex;
+  gap: var(--s-2);
+  align-items: center;
+}
+
+.errorCard .errorText {
+  color: var(--c-danger);
+}
+
+@media (max-width: 700px) {
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions {
+    justify-content: flex-end;
+  }
+}

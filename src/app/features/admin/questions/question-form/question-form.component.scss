@@ -1,0 +1,84 @@
+.formCard {
+  margin-bottom: var(--s-3);
+  padding: var(--s-3);
+  overflow: visible;
+}
+
+.field {
+  margin-bottom: var(--s-3);
+}
+
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--c-muted);
+  font-size: 12px;
+}
+.form-row,
+.form-content {
+  overflow: visible !important;
+}
+.input {
+  width: 100%;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-3);
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.val {
+  margin-top: 6px;
+  color: var(--c-danger);
+  font-size: 12px;
+}
+
+.inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-3);
+  width: fit-content;
+}
+
+.footerCard {
+  margin-top: var(--s-2);
+}
+
+.footerActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.errorCard .errorText {
+  color: var(--c-danger);
+  padding: var(--s-3);
+}
+
+.actions {
+  margin-top: var(--s-3);
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.backBtn {
+  text-decoration: none;
+  display: inline-flex;
+}
+/* ✅ Native select dropdown dark mode uyumu */
+select.input {
+  color-scheme: dark; 
+  background-color: transparent;
+}
+
+/* Chrome/Edge: option listesi için (tam garanti değil ama yardımcı) */
+select.input option {
+  background-color: #0b1220;
+  color: #e5e7eb;
+}
+

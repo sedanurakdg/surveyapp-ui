@@ -1,0 +1,141 @@
+.formCard { margin-bottom: var(--s-3); padding: var(--s-3); }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: var(--s-3);
+  align-items: end;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--c-muted);
+  font-size: 12px;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-3);
+  padding: 10px 12px;
+}
+
+.val {
+  margin-top: 6px;
+  color: var(--c-danger);
+  font-size: 12px;
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-3);
+}
+
+.sectionHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--s-3);
+  margin-bottom: var(--s-3);
+}
+
+.sectionTitle { font-weight: 800; }
+.sectionSub { margin-top: 4px; color: var(--c-muted); font-size: 12px; }
+
+.optListInner {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.optRow {
+  display: grid;
+  grid-template-columns: 34px 1fr 170px;
+  gap: var(--s-2);
+  align-items: start;
+  padding: var(--s-3);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-3);
+}
+
+.optIdx {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  border: 1px solid var(--c-border);
+  color: var(--c-muted);
+  font-weight: 700;
+}
+
+.optMain { min-width: 0; }
+
+.optActions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.miniBtn {
+  border: 1px solid var(--c-border);
+  background: transparent;
+  color: inherit;
+  padding: 8px 10px;
+  border-radius: var(--r-3);
+  cursor: pointer;
+}
+
+.miniBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.miniBtn.danger {
+  border-color: rgba(255, 0, 0, 0.35);
+}
+
+.footerCard {
+  margin-top: var(--s-2);
+}
+
+.footerActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.errorCard .errorText { color: var(--c-danger); }
+
+.actions {
+  margin-top: var(--s-3);
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.backBtn {
+  text-decoration: none;
+  display: inline-flex;
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .optRow {
+    grid-template-columns: 34px 1fr;
+  }
+
+  .optActions {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+}

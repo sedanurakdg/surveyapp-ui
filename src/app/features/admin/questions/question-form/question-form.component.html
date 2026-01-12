@@ -1,0 +1,65 @@
+<app-page
+  [title]="isEdit ? 'Soru Düzenle' : 'Yeni Soru'"
+  subtitle="Soru metni ve cevap şablonunu belirle."
+  maxWidth="lg"
+>
+  <app-card padded="md" *ngIf="loading">Yükleniyor...</app-card>
+
+  <app-card padded="md" *ngIf="!loading && error" class="errorCard">
+    <div class="errorText">{{ error }}</div>
+
+    <div class="actions">
+      <app-button variant="outline" size="sm" text="Tekrar Dene" (click)="isEdit ? loadForEdit(id!) : loadLookups()"></app-button>
+      <a [routerLink]="['/admin/questions']" class="backBtn">
+        <app-button variant="outline" size="sm" text="Listeye dön"></app-button>
+      </a>
+    </div>
+  </app-card>
+
+  <ng-container *ngIf="!loading && !error">
+    <div [formGroup]="form">
+      <app-card padded="md" class="formCard">
+        <div class="field">
+          <label>Soru Metni</label>
+          <textarea class="input" rows="3" formControlName="text" placeholder="Örn: Uygulamadan genel olarak memnun musunuz?"></textarea>
+          <div class="val" *ngIf="form.get('text')?.touched && form.get('text')?.invalid">
+            Soru metni zorunludur.
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Cevap Şablonu</label>
+          <select class="input" formControlName="answerTemplateId">
+           <option [ngValue]="0">Seçiniz...</option>
+            <option *ngFor="let t of templates" [value]="t.id">
+              {{ t.name }} ({{ t.optionCount }} seçenek)
+            </option>
+          </select>
+
+          <div class="val" *ngIf="form.get('answerTemplateId')?.touched && form.get('answerTemplateId')?.invalid">
+            Cevap şablonu seçilmelidir.
+          </div>
+        </div>
+
+        <div class="field inline" *ngIf="isEdit">
+          <input type="checkbox" formControlName="isActive" />
+          <span>Aktif</span>
+        </div>
+      </app-card>
+
+      <app-card padded="md" class="footerCard">
+        <div class="footerActions">
+          <app-button
+            variant="primary"
+            size="sm"
+            [text]="saving ? 'Kaydediliyor...' : 'Kaydet'"
+            (click)="save()"
+            [disabled]="saving"
+          ></app-button>
+
+          <app-button variant="outline" size="sm" text="Vazgeç" (click)="cancel()" [disabled]="saving"></app-button>
+        </div>
+      </app-card>
+    </div>
+  </ng-container>
+</app-page>

@@ -122,7 +122,6 @@ export class AdminSurveyFormComponent {
   }
 
   private normalizeDateTimeLocal(v: string): string {
-    // "2026-01-09T10:30" => "2026-01-09T10:30:00" (backend DateTime parse’ı için daha sağlam)
     if (!v) return v;
     return v.length === 16 ? `${v}:00` : v;
   }
