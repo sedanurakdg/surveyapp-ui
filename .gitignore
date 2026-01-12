@@ -6,10 +6,18 @@
 /out-tsc
 /bazel-out
 
+# OS/IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
 # Node
-/node_modules
-npm-debug.log
-yarn-error.log
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+yarn-error.log*
 
 # IDEs and editors
 .idea/
